@@ -53,3 +53,13 @@ legend("topright",
        col=c("green", "blue", "red", "gold"), cex=0.8)
 
 dev.off()
+
+##########################
+### GRAD STUDENTS ONLY ###
+##########################
+
+# load wikipedia page with election table
+wikiURL2 <- 'https://en.wikipedia.org/wiki/United_States_presidential_election'
+
+# by using htmltab, it removes the span from the table, which would require much more code to clean
+electoralCollege <- htmltab(doc = wikiURL2, which = "//th[text() = 'Order']/ancestor::table")
