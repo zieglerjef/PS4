@@ -100,5 +100,11 @@ plotFunction(destination = "~/Google Drive/WashU/Spring2016/appliedStats",
 # load wikipedia page with election table
 wikiURL2 <- 'https://en.wikipedia.org/wiki/United_States_presidential_election'
 
-# by using htmltab, it removes the span from the table, which would require much more code to clean
+# by using htmltab, it removes the span from the table, which would require much more code to clean with rvest
 electoralCollege <- htmltab(doc = wikiURL2, which = "//th[text() = 'Order']/ancestor::table")
+
+# make Order variable numeric
+electoralCollege$Order <- as.numeric(gsub("[[:alpha:]]*", "", electoralCollege$Order))
+
+# rename variable to merge with electionResults dataframe
+names(electoralCollege)[names(electoralCollege)=="Order"] <- "Number"
