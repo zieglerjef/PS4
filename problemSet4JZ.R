@@ -108,3 +108,25 @@ electoralCollege$Order <- as.numeric(gsub("[[:alpha:]]*", "", electoralCollege$O
 
 # rename variable to merge with electionResults dataframe
 names(electoralCollege)[names(electoralCollege)=="Order"] <- "Number"
+
+# create new variable with electoral votes for winner
+electoralCollege$WinnerEC <- str_extract(electoralCollege$Winner, "[0-9]{1,3}")
+
+# create new variable with electoral votes for all the other major candidates
+electoralCollege$RunnerUpEC <- str_extract_all(electoralCollege$"Other major candidates",
+                                                    "\\(?[0-9,.]+\\)?")
+
+# create new variable with party of winner
+electoralCollege$WinnerParty <- gsub("[\\(\\)]", "", regmatches(electoralCollege$Winner,
+                                  gregexpr("\\(.*?\\)", electoralCollege$Winner)))
+
+# create new variable with party of other major candidates
+electoralCollege$RunnerParty <- regmatches(electoralCollege$"Other major candidates",
+                                  gregexpr("(?<=\\().*?(?=\\))",
+                                  electoralCollege$"Other major candidates", perl=T))
+
+# join dataframes
+combinedElections <- join(electionResults, electoralCollege, by="Number")
+
+# Saving as .RData file
+save("combinedElections", file = "problemSet4JZ.Rdata")
