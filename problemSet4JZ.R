@@ -129,4 +129,4 @@ electoralCollege$RunnerParty <- regmatches(electoralCollege$"Other major candida
 combinedElections <- join(electionResults, electoralCollege, by="Number")
 
 # export .RData
-save("combinedElections", file = "problemSet4JZ.Rdata")
+save("combinedElections", file = "~/Google Drive/WashU/Spring2016/appliedStats/problemSet4JZ.Rdata")
