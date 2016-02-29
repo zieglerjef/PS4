@@ -128,5 +128,5 @@ electoralCollege$RunnerParty <- regmatches(electoralCollege$"Other major candida
 # join dataframes
 combinedElections <- join(electionResults, electoralCollege, by="Number")
 
-# Saving as .RData file
+# export .RData
 save("combinedElections", file = "problemSet4JZ.Rdata")
